@@ -1,0 +1,99 @@
+---
+- hosts: all
+  sudo: no
+  vars:
+    ruby_version: 2.2.3
+  tasks:
+    - name: Add Postgresql Repo
+      sudo: yes
+      apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"
+
+    - name: Add Postgresql Repo Key
+      sudo: yes
+      apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
+        state=present
+
+    - name: Update Apt Cache
+      sudo: yes
+      apt: update_cache=yes
+
+    - name: Install Ruby Dependencies
+      sudo: yes
+      apt: name={{item}}
+      with_items:
+        - redis-server
+        - git
+        - git-core
+        - curl
+        - zlib1g-dev
+        - build-essential
+        - libssl-dev
+        - libreadline-dev
+        - libyaml-dev
+        - libxml2-dev
+        - libxslt1-dev
+        - libcurl4-openssl-dev
+        - python-software-properties
+        - libffi-dev
+
+    - name: Install Sqlite
+      sudo: yes
+      apt: name={{ item }}
+      with_items:
+        - libsqlite3-dev
+        - sqlite3
+
+    - name: Install Mysql
+      sudo: yes
+      apt: name={{ item }}
+      with_items:
+        - libmysqlclient-dev
+        - mysql-server
+        - mysql-client
+
+    - name: Install Postgresql
+      sudo: yes
+      apt: name={{ item }}
+      with_items:
+        - postgresql-common
+        - postgresql-9.3
+        - libpq-dev
+
+    - name: Clone rbenv to ~/.ssh
+      git: repo=https://github.com/sstephenson/rbenv.git
+        dest=~/.rbenv
+        accept_hostkey=true
+        force=yes
+
+    - name: Clone ruby-build Into ~/.rbenv
+      git: repo=https://github.com/sstephenson/ruby-build.git
+        dest="~/.rbenv/plugins/ruby-build"
+        accept_hostkey=true
+        force=yes
+
+    - name: Add rbenv To Profile
+      template: src=templates/rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0755
+      sudo: true
+
+    - name: Check For Ruby {{ ruby_version }}
+      shell: bash -lc "rbenv versions | grep {{ ruby_version }}"
+      register: ruby_installed
+      changed_when: false
+      ignore_errors: yes
+      always_run: yes
+
+    - name: Install Ruby
+      shell: bash -lc "rbenv install {{ ruby_version }} && rbenv rehash"
+      when:
+        - ruby_installed.rc != 0
+
+    - name: Set Global Ruby Version
+      shell: bash -lc "rbenv global {{ ruby_version }} && rbenv rehash"
+      when:
+        - ruby_installed.rc != 0
+
+    - name: Set .gemrc
+      copy: src=files/gemrc dest=~/.gemrc
+
+    - name: Install Bundler & Rails
+      shell: bash -lc "gem install bundler rails"
