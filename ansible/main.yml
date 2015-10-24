@@ -59,7 +59,7 @@
         - postgresql-9.3
         - libpq-dev
 
-    - name: Clone rbenv to ~/.ssh
+    - name: Clone rbenv to ~/.rbenv
       git: repo=https://github.com/sstephenson/rbenv.git
         dest=~/.rbenv
         accept_hostkey=true
