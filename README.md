@@ -20,6 +20,8 @@ $ vagrant up
 $ vagrant ssh
 $ cd /vagrant
 $ rails new blog
+$ cd blog && rails s -b 0.0.0.0
+#-b 0.0.0.0 needed to access 3000 outside of vagrant
 ```
 
 For existing Rails projects copy the `Vagrantfile` and `ansible` directory to your Rails project directory and run:
@@ -28,7 +30,7 @@ For existing Rails projects copy the `Vagrantfile` and `ansible` directory to yo
 $ vagrant up
 $ vagrant ssh
 $ cd /vagrant
-$ rails s
+$ rails s -b 0.0.0.0
 ```
 
 ## Configuration
