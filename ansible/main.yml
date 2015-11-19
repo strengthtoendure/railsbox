@@ -36,6 +36,13 @@
         - python-software-properties
         - libffi-dev
 
+    - name: Install Nodejs Runtime
+      sudo: yes
+      apt: name={{item}}
+      with_items:
+        - nodejs
+        - npm
+
     - name: Install Sqlite
       sudo: yes
       apt: name={{ item }}
