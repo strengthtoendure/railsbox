@@ -65,11 +65,15 @@
         accept_hostkey=true
         force=yes
 
-    - name: Clone ruby-build Into ~/.rbenv
+    - name: Clone ruby-build to ~/.rbenv
       git: repo=https://github.com/sstephenson/ruby-build.git
         dest="~/.rbenv/plugins/ruby-build"
         accept_hostkey=true
         force=yes
+
+    - name: Clone rbenv-vars to ~/.rbenv
+      git: repo=https://github.com/sstephenson/rbenv-vars.git
+        dest="~/.rbenv/plugins/rbenv-vars"
 
     - name: Add rbenv To Profile
       template: src=templates/rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0755
