@@ -14,13 +14,18 @@ Includes:
 
 ## Getting started
 
-For new projects, clone this repo and run:
+For new projects, clone this repo into a directory you want to name your app and run:
 ```
+# locally
+$ git clone https://github.com/joshfng/railsbox.git blog
+$ cd blog && rm -rf .git #removes the railsbox git info
 $ vagrant up
 $ vagrant ssh
+
+# inside the vm
 $ cd /vagrant
-$ rails new blog
-$ cd blog && rails s -b 0.0.0.0
+$ rails new . -d YOUR_DATABASE
+$ rails s -b 0.0.0.0
 #-b 0.0.0.0 needed to access 3000 outside of vagrant
 ```
 
@@ -30,12 +35,13 @@ For existing Rails projects copy the `Vagrantfile` and `ansible` directory to yo
 $ vagrant up
 $ vagrant ssh
 $ cd /vagrant
+$ bundle install
 $ rails s -b 0.0.0.0
 ```
 
 ## Configuration
 
-Locate the `vars:` section inside `ansible/main.yml` to change which version of Ruby you would like installed.
+Locate the `vars:` section inside `ansible/main.yml` to change which version of Ruby you would like installed. You can also toggle on/off different databases using the `install_mysql`, `install_sqlite`, etc variables.
 
 Edit `ansible/files/gemrc` to change default gem install options
 
