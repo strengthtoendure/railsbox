@@ -3,15 +3,21 @@
   sudo: no
   vars:
     ruby_version: 2.2.3
+    install_redis: yes
+    install_postgres: yes
+    install_mysql: yes
+    install_sqlite: yes
   tasks:
     - name: Add Postgresql Repo
       sudo: yes
       apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"
+      when: install_postgres
 
     - name: Add Postgresql Repo Key
       sudo: yes
       apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
         state=present
+      when: install_postgres
 
     - name: Update Apt Cache
       sudo: yes
@@ -21,7 +27,6 @@
       sudo: yes
       apt: name={{item}}
       with_items:
-        - redis-server
         - git
         - git-core
         - curl
@@ -43,12 +48,18 @@
         - nodejs
         - npm
 
+    - name: Install Redis
+      sudo: yes
+      apt: name=redis-server
+      when: install_redis
+
     - name: Install Sqlite
       sudo: yes
       apt: name={{ item }}
       with_items:
         - libsqlite3-dev
         - sqlite3
+      when: install_sqlite
 
     - name: Install Mysql
       sudo: yes
@@ -57,6 +68,7 @@
         - libmysqlclient-dev
         - mysql-server
         - mysql-client
+      when: install_mysql
 
     - name: Install Postgresql
       sudo: yes
@@ -65,6 +77,7 @@
         - postgresql-common
         - postgresql-9.3
         - libpq-dev
+      when: install_postgres
 
     - name: Clone rbenv to ~/.rbenv
       git: repo=https://github.com/sstephenson/rbenv.git
