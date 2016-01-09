@@ -2,12 +2,11 @@ ENV['VAGRANT_DEFAULT_PROVIDER'] = 'virtualbox'
 Vagrant.require_version '>= 1.5'
 
 Vagrant.configure('2') do |config|
-  name = 'railsbox'
-  hostname = 'railsbox'
+  name = File.basename(Dir.getwd) + '-dev'
 
   config.vm.box = 'ubuntu/trusty64'
   config.ssh.forward_agent = true
-  config.vm.hostname = hostname
+  config.vm.hostname = name
   config.vm.network 'private_network', type: 'dhcp'
 
   config.vm.synced_folder '.', '/vagrant'
@@ -29,7 +28,7 @@ Vagrant.configure('2') do |config|
 
   config.vm.provision 'ansible' do |ansible|
     extra_vars = {
-      hostname: hostname,
+      hostname: name,
     }
 
     ansible.playbook = 'ansible/main.yml'
