@@ -25,6 +25,7 @@ $ vagrant ssh
 # inside the vm
 $ cd /vagrant
 $ rails new . -d YOUR_DATABASE
+$ rake db:create db:migrate
 $ rails s -b 0.0.0.0
 #-b 0.0.0.0 needed to access 3000 outside of vagrant
 ```
