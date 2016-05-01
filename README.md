@@ -4,7 +4,7 @@ Vagrant box provisioned with Ansible to run Ruby on Rails applications.
 
 Includes:
  - Ubuntu 14.04 LTS
- - Ruby 2.2.3 (via rbenv)
+ - Latest stable Ruby (via rbenv)
  - Most current version of Bundler & Rails at time of `vagrant up`
  - Mysql
  - Postgresql
