@@ -1,6 +1,6 @@
 # Rails Box
 
-Vagrant box provisioned with Ansible to run Ruby on Rails applications.
+Vagrant box provisioned with Ansible to run Ruby on Rails applications. You can skip using this repo (and ansible run time) by using the prebuilt [Vagrant box](https://atlas.hashicorp.com/joshfng/boxes/railsbox/) `vagrant init joshfng/railsbox; vagrant up --provider virtualbox`
 
 Includes:
  - Ubuntu 14.04 LTS
