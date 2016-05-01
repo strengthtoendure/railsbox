@@ -1,6 +1,8 @@
 ---
 - hosts: all
-  sudo: no
+  become: no
+  become_user: root
+  become_method: sudo
   vars:
     ruby_version: 2.3.1
     install_redis: yes
@@ -9,22 +11,22 @@
     install_sqlite: yes
   tasks:
     - name: Add Postgresql Repo
-      sudo: yes
+      become: yes
       apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"
       when: install_postgres
 
     - name: Add Postgresql Repo Key
-      sudo: yes
+      become: yes
       apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
         state=present
       when: install_postgres
 
     - name: Update Apt Cache
-      sudo: yes
+      become: yes
       apt: update_cache=yes
 
     - name: Install Ruby Dependencies
-      sudo: yes
+      become: yes
       apt: name={{item}}
       with_items:
         - git
@@ -42,19 +44,19 @@
         - libffi-dev
 
     - name: Install Nodejs Runtime
-      sudo: yes
+      become: yes
       apt: name={{item}}
       with_items:
         - nodejs
         - npm
 
     - name: Install Redis
-      sudo: yes
+      become: yes
       apt: name=redis-server
       when: install_redis
 
     - name: Install Sqlite
-      sudo: yes
+      become: yes
       apt: name={{ item }}
       with_items:
         - libsqlite3-dev
@@ -62,7 +64,7 @@
       when: install_sqlite
 
     - name: Install Mysql
-      sudo: yes
+      become: yes
       apt: name={{ item }}
       with_items:
         - libmysqlclient-dev
@@ -71,7 +73,7 @@
       when: install_mysql
 
     - name: Install Postgresql
-      sudo: yes
+      become: yes
       apt: name={{ item }}
       with_items:
         - postgresql-common
@@ -97,7 +99,7 @@
 
     - name: Add rbenv To Profile
       template: src=templates/rbenv.sh.j2 dest=/etc/profile.d/rbenv.sh owner=root group=root mode=0755
-      sudo: true
+      become: true
 
     - name: Check For Ruby {{ ruby_version }}
       shell: bash -lc "rbenv versions | grep {{ ruby_version }}"
