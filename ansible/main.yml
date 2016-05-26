@@ -12,12 +12,12 @@
   tasks:
     - name: Add Postgresql Repo
       become: yes
-      apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main"
+      apt_repository: repo="deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
       when: install_postgres
 
     - name: Add Postgresql Repo Key
       become: yes
-      apt_key: url=http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc
+      apt_key: url=https://www.postgresql.org/media/keys/ACCC4CF8.asc
         state=present
       when: install_postgres
 
@@ -77,7 +77,7 @@
       apt: name={{ item }}
       with_items:
         - postgresql-common
-        - postgresql-9.3
+        - postgresql-9.4
         - libpq-dev
       when: install_postgres
 
