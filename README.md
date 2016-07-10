@@ -14,30 +14,19 @@ Includes:
 
 ## Getting started
 
-For new projects, clone this repo into a directory you want to name your app and run:
 ```
-# locally
-$ git clone https://github.com/joshfng/railsbox.git blog
-$ cd blog && rm -rf .git #removes the railsbox git info
-$ vagrant up
-$ vagrant ssh
+cd myrailsproject
+curl -O https://raw.githubusercontent.com/joshfng/railsbox/master/Vagrantfile
+vagrant up
+vagrant ssh
+cd /vagrant
 
-# inside the vm
-$ cd /vagrant
-$ rails new . -d YOUR_DATABASE
-$ rake db:create db:migrate
-$ rails s -b 0.0.0.0
-#-b 0.0.0.0 needed to access 3000 outside of vagrant
-```
+#if you don't already have a rails app
+rails new .
 
-For existing Rails projects copy the `Vagrantfile` to your Rails project directory and run:
-
-```
-$ vagrant up
-$ vagrant ssh
-$ cd /vagrant
-$ bundle install
-$ rails s -b 0.0.0.0
+bundle
+bundle exec rake db:create
+bundle exec rake db:migrate
 ```
 
 ## License
