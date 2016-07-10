@@ -1,11 +1,11 @@
 # Rails Box
 
-Vagrant box provisioned with Ansible to run Ruby on Rails applications.
+Vagrant box provisioned Ruby on Rails applications. Built using [railsbox-packer](https://github.com/joshfng/railsbox-packer). You can find the box hosted on Atlas [here](https://atlas.hashicorp.com/joshfng/boxes/railsbox/)
 
 Includes:
  - Ubuntu 16.04 LTS
  - Latest stable Ruby (via rbenv)
- - Most current version of Bundler & Rails at time of `vagrant up`
+ - Most current version of Bundler & Rails
  - Mysql
  - Postgresql
  - Sqlite
@@ -30,7 +30,7 @@ $ rails s -b 0.0.0.0
 #-b 0.0.0.0 needed to access 3000 outside of vagrant
 ```
 
-For existing Rails projects copy the `Vagrantfile` and `ansible` directory to your Rails project directory and run:
+For existing Rails projects copy the `Vagrantfile` to your Rails project directory and run:
 
 ```
 $ vagrant up
@@ -39,14 +39,6 @@ $ cd /vagrant
 $ bundle install
 $ rails s -b 0.0.0.0
 ```
-
-## Configuration
-
-Locate the `vars:` section inside `ansible/main.yml` to change which version of Ruby you would like installed. You can also toggle on/off different databases using the `install_mysql`, `install_sqlite`, etc variables.
-
-Edit `ansible/files/gemrc` to change default gem install options
-
-Edit `Vagrantfile` to change CPU and Memory settings.
 
 ## License
 

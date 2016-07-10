@@ -4,7 +4,7 @@ Vagrant.require_version '>= 1.5'
 Vagrant.configure('2') do |config|
   name = File.basename(Dir.getwd) + '-dev'
 
-  config.vm.box = 'bento/ubuntu-16.04'
+  config.vm.box = 'joshfng/railsbox'
   config.ssh.forward_agent = true
   config.vm.hostname = name
   #config.vm.network 'private_network', type: 'dhcp'
@@ -25,15 +25,4 @@ Vagrant.configure('2') do |config|
 
   # rails
   config.vm.network 'forwarded_port', guest: 3000, host: 3000
-
-  config.vm.provision 'ansible' do |ansible|
-    extra_vars = {
-      hostname: name,
-    }
-
-    ansible.playbook = 'ansible/main.yml'
-    ansible.limit = 'all'
-    ansible.extra_vars = extra_vars
-    #ansible.verbose = 'vvvv'
-  end
 end
