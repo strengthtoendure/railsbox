@@ -19,7 +19,6 @@ cd myrailsproject
 curl -O https://raw.githubusercontent.com/joshfng/railsbox/master/Vagrantfile
 vagrant up
 vagrant ssh
-cd /vagrant
 
 #if you don't already have a rails app
 rails new .
