@@ -7,7 +7,6 @@ Vagrant.configure('2') do |config|
   config.vm.box = 'joshfng/railsbox'
   config.ssh.forward_agent = true
   config.vm.hostname = name
-  #config.vm.network 'private_network', type: 'dhcp'
 
   config.vm.synced_folder '.', '/vagrant'
 
@@ -19,7 +18,7 @@ Vagrant.configure('2') do |config|
       'modifyvm', :id,
       '--nictype1', 'virtio',
       '--name', name,
-      '--natdnshostresolver1', 'on',
+      '--natdnshostresolver1', 'on'
     ]
   end
 
