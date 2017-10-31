@@ -1,5 +1,7 @@
 # Rails Box
 
+[![Build Status](https://travis-ci.org/joshfng/railsbox.svg?branch=master)](https://travis-ci.org/joshfng/railsbox)
+
 Vagrant box provisioned Ruby on Rails applications. Built using [railsbox-packer](https://github.com/joshfng/railsbox-packer). You can find the box hosted on Atlas [here](https://atlas.hashicorp.com/joshfng/boxes/railsbox/)
 
 Includes:
