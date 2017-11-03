@@ -13,6 +13,8 @@ Includes:
  - Sqlite
  - Redis
  - Git
+ - Node.js installed via NVM
+ - Chrome and Chromedriver for headless testing
 
 ## Getting started
 
@@ -34,12 +36,7 @@ bundle exec rake db:migrate
 The mysql root password is `root`
 
 ## Postgresql
-PG is installed, but you need to manually create a user and db if you want to use it
-```
-sudo -u postgres psql -c "CREATE ROLE MY_USER LOGIN UNENCRYPTED PASSWORD 'MY_PASSWORD' SUPERUSER INHERIT NOCREATEDB NOCREATEROLE NOREPLICATION;"
-sudo -u postgres /usr/bin/createdb --echo --owner=MY_USER MY_DB_NAME
-service postgresql restart
-```
+PG is installed and the user `vagrant` has permissions to create databases
 
 ## License
 
