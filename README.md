@@ -5,7 +5,7 @@
 Vagrant box provisioned Ruby on Rails applications. Built using [railsbox-packer](https://github.com/joshfng/railsbox-packer). You can find the box hosted on Atlas [here](https://atlas.hashicorp.com/joshfng/boxes/railsbox/)
 
 Includes:
- - Ubuntu 16.04 LTS
+ - Ubuntu 18.04 LTS
  - Latest stable Ruby (via rbenv)
  - Most current version of Bundler & Rails
  - Mysql
